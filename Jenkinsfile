@@ -1,5 +1,5 @@
 pipeline {
-    agent {label 'sla'}
+    agent {label 'slavebuild'}
     stages {
         stage('my Build') {
             steps {
@@ -10,17 +10,17 @@ pipeline {
         stage('publish stage') {
             steps {
                 sh "echo ${BUILD_VERSION}"
-                sh 'docker login -u prajwal1327 -p Prajwal@1'
-                sh 'docker tag tomcat_build:${BUILD_VERSION} prajwal1327/mytomcat:${BUILD_VERSION}'
-                sh 'docker push prajwal1327/mytomcat:${BUILD_VERSION}'
+                sh 'docker login -u madhusudhanpk -p 116007App@
+                sh 'docker tag tomcat_build:${BUILD_VERSION} madhusudhanpk/mytomcat:${BUILD_VERSION}'
+                sh 'docker push madhusudhanpk/mytomcat:${BUILD_VERSION}'
             }
         } 
         stage( 'my deploy' ) {
-        agent {label 'ansible'} 
+        agent {label 'slaverun'} 
             steps {
-               sh 'docker pull prajwal1327/mytomcat:${BUILD_VERSION}'
+               sh 'docker pull madhusudhanpk/mytomcat:${BUILD_VERSION}'
                sh 'docker rm -f mytomcat'
-               sh 'docker run -d -p 8080:8080 --name mytomcat prajwal1327/mytomcat:${BUILD_VERSION}'
+               sh 'docker run -d -p 8085:8080 --name mytomcat madhusudhanpk/mytomcat:${BUILD_VERSION}'
             }
         }    
     } 
