@@ -9,7 +9,7 @@ pipeline {
         }  
         stage('publish stage') {
             steps {
-                sh "echo ${BUILD_VERSION}"
+                
                 sh 'docker login -u madhusudhanpk -p 116007App@'
                 sh 'docker tag tomcat_build:2.0 madhusudhanpk/tomcat:2.0'
                 sh 'docker push madhusudhanpk/tomcat:2.0'
