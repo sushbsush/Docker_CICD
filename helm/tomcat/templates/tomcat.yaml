@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata:
-  name: tomcat-deployment
+metadata: 
+  name: {{ .Release.Name }}
 spec:
-  replicas: {{ .Values.replica }}
+  replicas: {{ .Values.replicas }}
   selector:
-    matchLabels:
-      app: {{ .Values.selector }}
+    matchLabels: 
+      app: {{ .Values.selector_matchlabels }}
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -14,10 +14,9 @@ spec:
       maxUnavailable: 1
   template:
     metadata:
-      name: tomcat
+      name: {{ .Values.deployment_name }}
       labels:
-        app: {{ .Values.selector }}
+        app: {{ .Values.selector_matchlabels }}
     spec:
       containers:
-      - name: tomcat
-        image: sushbsush/tomcat:1.1
+      - name: {{ .Values.deployment_name }}
