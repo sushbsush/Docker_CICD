@@ -20,3 +20,4 @@ spec:
     spec:
       containers:
       - name: {{ .Values.deployment_name }}
+        image: {{ .Values.registry_name }}/{{ .Values.docker_repo_name }}:{{ .Values.image_tag }}
