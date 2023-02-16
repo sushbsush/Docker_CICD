@@ -1,0 +1,2 @@
+selector: tomcat
+replica: 8
